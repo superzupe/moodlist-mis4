@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="style.css">
+    <title>moodlist - mis4</title>
+</head>
+
+<body>
+    <header>
+        <h4>Hi, I’m</h4>
+        <p>Alifya Zulfa Zahro<br>
+            Fullstack Web Developer Student<br>
+            <a href="https://www.linkedin.com/in/alifya-zulfa-zahro/">LinkedIn</a>
+        </p>
+        <img src="assets/img/profile-avatar.jpg" alt="Profile Avatar">
+    </header>
+
+    <main>
+        <section>
+            <div>
+                <h1>Add a task to get started !! 📌</h1>
+                <button title="Click to add task"><i class="fa-solid fa-plus"></i></button>
+            </div>
+
+        </section>
+
+        <section>
+            <div>
+                <label for="task">Task Name <span>*</span></label>
+                <input type="text" id="task" placeholder="Add task here...">
+
+                <label for="deadline">Dealine</label>
+                <input type="date" id="deadline" placeholder="Select date">
+
+                <label for="priority">Priority <span>*</span></label>
+                <select id="priority">
+                    <option value="" disabled selected>Select priority</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <div>
+                <button>cancel</button>
+                <button>save</button>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <button title="Delete all"><i class="fa-solid fa-trash"></i></button>
+            </div>
+            <div>
+                <ul>
+                    <li>My Task</li>
+                    <li>Done</li>
+                    <li>Overdue</li>
+                </ul>
+            </div>
+
+            <div>
+                <div>
+                    <p>No tasks yet. Add something to get started!</p>
+                    <p>Tasks you need to do today</p>
+                </div>
+
+            </div>
+            
+            <div>
+                <div>
+                    <p>Nothing completed yet. Keep going!</p>
+                    <p>Tasks you’ve finished ✅</p>
+                </div>
+            </div>
+            
+            <div>
+                <div>
+                    <p>No overdue tasks. Great job staying on track!</p>
+                    <p>Tasks past their deadline ⚠️</p>
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <button><i class="fa-solid fa-trash"></i></button>
+                </div>
+
+                <div>
+                    <div>
+                        <p>INI JUDUL TASK</p>
+                        <p>TANGGAL DIBUAT -> Created on 25 Oct 2025</p>
+                        <p>INI diisi dari DEADLINE</p>
+                        <p>High/Med/Low</p>
+                    </div>
+                    <div>
+                        <button><i class="fa-solid fa-check"></i></button>
+                        <button><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

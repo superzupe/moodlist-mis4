@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+:root {
+    --bg-universal: #FAF9FB;
+    --bg-header: #E3DFFD;
+    --border: #E4E4E4;
+
+    --card-low: #DDEBFF;
+    --card-medium: #FDF1D6;
+    --card-high: #F6B7B7;
+    --card-overdue: #FFD6D6;
+    --card-done: #DCD8E1;
+
+    --card-low-hover: #CCE0FF;
+    --card-medium-hover: #FAE5B7;
+    --card-high-hover: #F49D9E;
+    --card-overdue-hover: #FFBABA;
+    --card-done-hover: #CFCBD7;
+
+    --border-low: #91C2FF;
+    --border-medium: #FBD87A;
+    --border-high: #F08080;
+    --border-overdue: #FF6B6B;
+    --border-done: #BEBAC3;
+
+    --btn-add: #B4E4FF;
+    --btn-add-hover: #A3DAFF;
+    --btn-delete: #FF7B7B;
+    --btn-delete-hover: #FF5A5A;
+    --btn-delete-disabled: #F0E9E9;
+
+    --text-1: #4A3C6E;
+    --text-2: #6E6687;
+    --text-3: #9E96B3;
+}
