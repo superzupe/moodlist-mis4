@@ -15,97 +15,133 @@
 
 <body>
     <header>
-        <h4>Hi, I’m</h4>
-        <p>Alifya Zulfa Zahro<br>
-            Fullstack Web Developer Student<br>
-            <a href="https://www.linkedin.com/in/alifya-zulfa-zahro/">LinkedIn</a>
-        </p>
-        <img src="assets/img/profile-avatar.jpg" alt="Profile Avatar">
+        <div class="header-title">
+            <h1>Hi, I’m</h1>
+            <p class="text-medium">Alifya Zulfa Zahro<br>
+                Fullstack Web Developer Student<br>
+                <a href="https://www.linkedin.com/in/alifya-zulfa-zahro/">LinkedIn</a>
+            </p>
+        </div>
+        <img src="assets/img/profile-avatar.png" alt="Profile Avatar">
     </header>
 
     <main>
-        <section>
-            <div>
+        <section class="add-task">
+            <div class="add-task-header">
                 <h1>Add a task to get started !! 📌</h1>
                 <button title="Click to add task"><i class="fa-solid fa-plus"></i></button>
             </div>
 
+            <div class="add-task-form">
+                <div class="task-form">
+                    <div class="form-group">
+                        <label for="task" class="text-base">Task Name <span>*</span></label>
+                        <input type="text" id="task" placeholder="Add task here..." class="text-task">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deadline" class="text-base">Dealine</label>
+                        <input type="date" id="deadline" class="text-task">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="priority" class="text-base">Priority <span>*</span></label>
+                        <select id="priority" class="text-task">
+                            <option value="" disabled selected>Select priority</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="task-form-action">
+                    <button class="btn-task-form-action btn-cancel">cancel</button>
+                    <button class="btn-task-form-action">save</button>
+                </div>
+            </div>
         </section>
 
-        <section>
-            <div>
-                <label for="task">Task Name <span>*</span></label>
-                <input type="text" id="task" placeholder="Add task here...">
-
-                <label for="deadline">Dealine</label>
-                <input type="date" id="deadline" placeholder="Select date">
-
-                <label for="priority">Priority <span>*</span></label>
-                <select id="priority">
-                    <option value="" disabled selected>Select priority</option>
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
-                </select>
+        <section class="tasks">
+            <div class="btn-delete-tasks ">
+                <button title="Delete all" class="btn-delete-all"><i class="fa-solid fa-trash"></i></button>
             </div>
-            <div>
-                <button>cancel</button>
-                <button>save</button>
-            </div>
-        </section>
-
-        <section>
-            <div>
-                <button title="Delete all"><i class="fa-solid fa-trash"></i></button>
-            </div>
-            <div>
-                <ul>
-                    <li>My Task</li>
-                    <li>Done</li>
-                    <li>Overdue</li>
+            <div class="tasks-tabs">
+                <ul class="text-base">
+                    <li class="mytask-tab">My Task</li>
+                    <li class="done-tab">Done</li>
+                    <li class="overdue-tab">Overdue</li>
                 </ul>
+                <div class="tabs-divider"></div>
             </div>
 
-            <div>
-                <div>
-                    <p>No tasks yet. Add something to get started!</p>
-                    <p>Tasks you need to do today</p>
+            <div class="tasks-list">
+                <div class="tasks-list-empty">
+                    <p class="text-task">No tasks yet. Add something to get started!</p>
+                    <p class="text-medium">Tasks you need to do today</p>
                 </div>
 
-            </div>
-            
-            <div>
-                <div>
-                    <p>Nothing completed yet. Keep going!</p>
-                    <p>Tasks you’ve finished ✅</p>
-                </div>
-            </div>
-            
-            <div>
-                <div>
-                    <p>No overdue tasks. Great job staying on track!</p>
-                    <p>Tasks past their deadline ⚠️</p>
+                <div class="tasks-list-content">
+                    <div class="task-card">
+                        <div class="task-card-item">
+                            <p class="text-base">konser treasureeeeeeeeeee liat yociiiiiiiiiiii</p>
+                            <p class="text-medium">Created on 25 Oct 2025</p>
+                            <p class="text-medium">Due on 25 Oct 2025</p>
+                            <p id="labelPriority" class="text-medium level-priority low">Low</p>
+                        </div>
+                        <div class="task-card-action">
+                            <button class="btn-check"><i class="fa-solid fa-check"></i></button>
+                            <button class="btn-delete-card"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="task-card">
+                        <div class="task-card-item">
+                            <p class="text-base">starlympics gmmtv 2025, mau liat perth tanapon tercinta</p>
+                            <p class="text-medium">Created on 25 Oct 2025</p>
+                            <p class="text-medium">Due on 25 Oct 2025</p>
+                            <p class="text-medium level-priority med">Med</p>
+                        </div>
+                        <div class="task-card-action">
+                            <button class="btn-check"><i class="fa-solid fa-check"></i></button>
+                            <button class="btn-delete-card"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="task-card">
+                        <div class="task-card-item">
+                            <p class="text-base">Revamp mau tamat tinggal 2 eps lagieee</p>
+                            <p class="text-medium">Created on 25 Oct 2025</p>
+                            <p class="text-medium">Due on 25 Oct 2025</p>
+                            <p class="text-medium level-priority high">High</p>
+                        </div>
+                        <div class="task-card-action">
+                            <button class="btn-check"><i class="fa-solid fa-check"></i></button>
+                            <button class="btn-delete-card"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div>
-                <div>
+            <div class="tasks-list">
+                <div class="tasks-list-empty">
+                    <p class="text-task">Nothing completed yet. Keep going!</p>
+                    <p  class="text-medium">Tasks you’ve finished ✅</p>
+                </div>
+                <!-- <div>
                     <button><i class="fa-solid fa-trash"></i></button>
-                </div>
-
-                <div>
-                    <div>
-                        <p>INI JUDUL TASK</p>
-                        <p>TANGGAL DIBUAT -> Created on 25 Oct 2025</p>
-                        <p>INI diisi dari DEADLINE</p>
-                        <p>High/Med/Low</p>
-                    </div>
-                    <div>
-                        <button><i class="fa-solid fa-check"></i></button>
-                        <button><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                </div>
+                </div> -->
             </div>
+
+            <div class="tasks-list">
+                <div class="tasks-list-empty">
+                    <p class="text-task">No overdue tasks. Great job staying on track!</p>
+                    <p  class="text-medium">Tasks past their deadline ⚠️</p>
+                </div>
+                <!-- <div>
+                    <button><i class="fa-solid fa-trash"></i></button>
+                </div> -->
+            </div>
+
+           
         </section>
     </main>
 </body>
