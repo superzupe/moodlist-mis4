@@ -1,5 +1,6 @@
 const btnAddTask = document.getElementById("btnAddTask");
 const addTaskForm = document.getElementById("addTaskForm");
+const storageKey = "tasksItem"
 
 const showAddTaskForm = () => {
   btnAddTask.style.display = "none";
@@ -113,6 +114,16 @@ const showTasksList = () => {
   btnDeleteAll.classList.toggle("btn-delete-all_active", tasksItem.length > 0);
 };
 
+const loadTasks = () => {
+  const saved = localStorage.getItem("tasksItem");
+  if (saved) tasksItem = JSON.parse(saved);
+  checkOverdue();
+};
+
+const saveTasks = () => {
+  localStorage.setItem("tasksItem", JSON.stringify(tasksItem));
+};
+
 const createTask = () => {
   let taskValue = task.value; //ambil value dalam fungsi
   let deadlineValue = deadline.value;
@@ -149,6 +160,7 @@ const createTask = () => {
   checkOverdue();
   showTasksList();
   closeTaskForm();
+  saveTasks();
 };
 
 //tombol save
@@ -170,12 +182,14 @@ const addTask = () => {
 const deleteAll = () => {
   tasksItem.length = 0;
   showTasksList();
+  saveTasks();
 };
 
 //tombol delete per card
 const deleteCard = (idx) => {
   tasksItem.splice(idx, 1);
   showTasksList();
+  saveTasks();
 };
 
 //tombol ceklis
@@ -183,6 +197,7 @@ const checkTask = (idx) => {
   tasksItem[idx].done = !tasksItem[idx].done;
   checkOverdue();
   showTasksList();
+  saveTasks();
 };
 
 //tab control
@@ -215,4 +230,7 @@ const showOverdueTask = () => {
 };
 
 // INIT
-showTasksList();
+document.addEventListener("DOMContentLoaded", () => {
+  loadTasks();
+  showTasksList();
+});
