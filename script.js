@@ -32,17 +32,50 @@ const task = document.getElementById("task");
 const deadline = document.getElementById("deadline");
 const priority = document.getElementById("priority");
 
-const showTasksList = () => {   //ini adalah fungsi utama untuk penampilan datanya
+let currentTab = "my";
+
+const checkOverdue = () => {
+  const today = new Date();
+
+  //cek overdue
+  tasksItem.forEach((item) => {
+    if (item.deadline) {
+      const deadlineDate = new Date(item.deadline);
+      item.isOverdue = !item.done && deadlineDate < today;
+    } else {
+      item.isOverdue = false;
+    }
+  });
+};
+
+const showTasksList = () => {
+  //ini adalah fungsi utama untuk penampilan datanya
+  checkOverdue();
   tasksListContent.innerHTML = "";
 
-  if (tasksItem == 0) {
-    emptyMyTaskTab.style.display = "flex";
-  } else {
-    emptyMyTaskTab.style.display = "none";
+  //tampilkan pesan default saat empty
+  let tasksToShow = [];
+  if (currentTab === "my") {
+    tasksToShow = tasksItem
+      .map((item, index) => ({ ...item, originalIndex: index }))
+      .filter((item) => !item.done && !item.isOverdue);
+    emptyMyTaskTab.style.display = tasksToShow.length === 0 ? "flex" : "none";
+  } else if (currentTab === "done") {
+    tasksToShow = tasksItem
+      .map((item, index) => ({ ...item, originalIndex: index }))
+      .filter((item) => item.done);
+    emptyDoneTaskTab.style.display = tasksToShow.length === 0 ? "flex" : "none";
+  } else if (currentTab === "overdue") {
+    tasksToShow = tasksItem
+      .map((item, index) => ({ ...item, originalIndex: index }))
+      .filter((item) => !item.done && item.isOverdue);
+    emptyOverdueTaskTab.style.display =
+      tasksToShow.length === 0 ? "flex" : "none";
   }
 
-  for (const [idx, item] of tasksItem.entries()) {
-    
+  //loop task
+  for (const item of tasksToShow) {
+    const idx = item.originalIndex;
     const doneStyle = item.done ? "line-through" : "none";
     const checkIconClass = item.done ? "check-icon_active" : "check-icon";
 
@@ -51,10 +84,12 @@ const showTasksList = () => {   //ini adalah fungsi utama untuk penampilan datan
     else if (item.priority === "medium") priorityClass = "med";
     else priorityClass = "low";
 
-    tasksListContent.innerHTML += `
+      tasksListContent.innerHTML += `
     <div class="task-card">
     <div class="task-card-item">
-        <p class="text-base" id="taskText-${idx}" style="text-decoration: ${doneStyle}">${item.task}</p>
+        <p class="text-base" id="taskText-${idx}" style="text-decoration: ${doneStyle}">${
+        item.task
+      }</p>
         <p class="text-medium">Created on ${item.createdOn}</p>
             ${
               item.deadline
@@ -62,8 +97,8 @@ const showTasksList = () => {   //ini adalah fungsi utama untuk penampilan datan
                 : ""
             }
         <p class="text-medium level-priority ${priorityClass}">${
-      item.priority
-    }</p>
+        item.priority
+      }</p>
     </div>
     <div class="task-card-action">
         <button class="btn-check" onclick="checkTask(${idx})"><i class="fa-solid fa-check ${checkIconClass}" id="checkIcon-${idx}"></i></button>
@@ -71,6 +106,7 @@ const showTasksList = () => {   //ini adalah fungsi utama untuk penampilan datan
     </div>
 </div>
     `;
+    
   }
 
   btnDeleteAll.disabled = tasksItem.length === 0;
@@ -99,17 +135,23 @@ const createTask = () => {
     });
   }
 
-  tasksItem = [...tasksItem, {
-    task: taskValue,
-    createdOn: dateFormated,
-    deadline: deadlineValueDateFormated,
-    priority: priorityValue,
-    done: false,
-  },]; 
+  tasksItem = [
+    ...tasksItem,
+    {
+      task: taskValue,
+      createdOn: dateFormated,
+      deadline: deadlineValueDateFormated,
+      priority: priorityValue,
+      done: false,
+      isOverdue: false,
+    },
+  ];
+  checkOverdue();
   showTasksList();
-
+  closeTaskForm();
 };
 
+//tombol save
 const addTask = () => {
   if (!task.value) {
     alert("Give your task a name!");
@@ -121,55 +163,26 @@ const addTask = () => {
     priority.focus();
     return;
   }
-
   createTask();
-  closeTaskForm();
-
-  task.value = "";
-  deadline.value = "";
-  priority.value = "";
-  console.log(tasksItem);
 };
 
+//tombol del all
 const deleteAll = () => {
   tasksItem.length = 0;
   showTasksList();
-  console.log("btn hapus aktif");
 };
 
+//tombol delete per card
 const deleteCard = (idx) => {
   tasksItem.splice(idx, 1);
   showTasksList();
 };
 
-
 //tombol ceklis
 const checkTask = (idx) => {
-   tasksItem[idx].done = !tasksItem[idx].done;
-  
-  const taskText = document.getElementById(`taskText-${idx}`);
-  const checkIcon = document.getElementById(`checkIcon-${idx}`);
-
-if (tasksItem[idx].done) {
-  // kalau udah dicheck, tampilkan tab DONE
-  showDoneTask();
-} else {
-  // kalau di-uncheck, balik ke tab My Task
-  showMyTask();
-}
-
-  //toggle decoration
-  if (tasksItem[idx].done) {
-   taskText.style.textDecoration = "line-through";
-   checkIcon.classList.remove("check-icon");
-   checkIcon.classList.add("check-icon_active");
-  } else {
-     taskText.style.textDecoration = "none";
-     checkIcon.classList.remove("check-icon_active");
-     checkIcon.classList.add("check-icon");
-  }
-
-  console.log(tasksItem[idx])
+  tasksItem[idx].done = !tasksItem[idx].done;
+  checkOverdue();
+  showTasksList();
 };
 
 //tab control
@@ -178,19 +191,28 @@ doneTaskTab.style.display = "none";
 overdueTaskTab.style.display = "none";
 
 const showMyTask = () => {
+  currentTab = "my";
+  showTasksList();
   myTaskTab.style.display = "flex";
   doneTaskTab.style.display = "none";
   overdueTaskTab.style.display = "none";
 };
 
 const showDoneTask = () => {
+  currentTab = "done";
+  showTasksList();
   myTaskTab.style.display = "none";
   doneTaskTab.style.display = "flex";
   overdueTaskTab.style.display = "none";
 };
 
 const showOverdueTask = () => {
+  currentTab = "overdue";
+  showTasksList();
   myTaskTab.style.display = "none";
   doneTaskTab.style.display = "none";
   overdueTaskTab.style.display = "flex";
 };
+
+// INIT
+showTasksList();
