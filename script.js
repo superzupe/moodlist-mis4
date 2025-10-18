@@ -1,6 +1,6 @@
 const btnAddTask = document.getElementById("btnAddTask");
 const addTaskForm = document.getElementById("addTaskForm");
-const storageKey = "tasksItem"
+const storageKey = "tasksItem";
 
 const showAddTaskForm = () => {
   btnAddTask.style.display = "none";
@@ -26,6 +26,10 @@ const overdueTaskTab = document.getElementById("overdueTaskTab");
 const emptyMyTaskTab = document.getElementById("emptyMyTaskTab");
 const emptyDoneTaskTab = document.getElementById("emptyDoneTaskTab");
 const emptyOverdueTaskTab = document.getElementById("emptyOverdueTaskTab");
+
+const btnMyTask = document.getElementById("btnMyTask");
+const btnDoneTask = document.getElementById("btnDoneTask");
+const btnOverdueTask = document.getElementById("btnOverdueTask");
 
 const tasksListContent = document.getElementById("tasksListContent");
 
@@ -54,24 +58,32 @@ const showTasksList = () => {
   checkOverdue();
   tasksListContent.innerHTML = "";
 
-  //tampilkan pesan default saat empty
+  // iterasi warna saat ada di tab tertentu
+  btnMyTask.classList.remove("mytask-tab_active");
+  btnDoneTask.classList.remove("done-tab_active");
+  btnOverdueTask.classList.remove("overdue-tab_active");
+
+  //tampilkan saat di task tertentu, yaitu classList dan pesan default saat empty
   let tasksToShow = [];
   if (currentTab === "my") {
     tasksToShow = tasksItem
       .map((item, index) => ({ ...item, originalIndex: index }))
       .filter((item) => !item.done && !item.isOverdue);
     emptyMyTaskTab.style.display = tasksToShow.length === 0 ? "flex" : "none";
+    btnMyTask.classList.add("mytask-tab_active");
   } else if (currentTab === "done") {
     tasksToShow = tasksItem
       .map((item, index) => ({ ...item, originalIndex: index }))
       .filter((item) => item.done);
     emptyDoneTaskTab.style.display = tasksToShow.length === 0 ? "flex" : "none";
+    btnDoneTask.classList.add("done-tab_active");
   } else if (currentTab === "overdue") {
     tasksToShow = tasksItem
       .map((item, index) => ({ ...item, originalIndex: index }))
       .filter((item) => !item.done && item.isOverdue);
     emptyOverdueTaskTab.style.display =
       tasksToShow.length === 0 ? "flex" : "none";
+    btnOverdueTask.classList.add("overdue-tab_active");
   }
 
   //loop task
@@ -85,12 +97,12 @@ const showTasksList = () => {
     else if (item.priority === "medium") priorityClass = "med";
     else priorityClass = "low";
 
-      tasksListContent.innerHTML += `
+    tasksListContent.innerHTML += `
     <div class="task-card">
     <div class="task-card-item">
         <p class="text-base" id="taskText-${idx}" style="text-decoration: ${doneStyle}">${
-        item.task
-      }</p>
+      item.task
+    }</p>
         <p class="text-medium">Created on ${item.createdOn}</p>
             ${
               item.deadline
@@ -98,8 +110,8 @@ const showTasksList = () => {
                 : ""
             }
         <p class="text-medium level-priority ${priorityClass}">${
-        item.priority
-      }</p>
+      item.priority
+    }</p>
     </div>
     <div class="task-card-action">
         <button class="btn-check" onclick="checkTask(${idx})"><i class="fa-solid fa-check ${checkIconClass}" id="checkIcon-${idx}"></i></button>
@@ -107,7 +119,6 @@ const showTasksList = () => {
     </div>
 </div>
     `;
-    
   }
 
   btnDeleteAll.disabled = tasksItem.length === 0;

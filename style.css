@@ -10,12 +10,12 @@
     --border-focus: #77859d;
 
     --color-task: #E3F2FF;
-    --color-overdue: #FFB5B5;
     --color-done: #CBE8D6;
+    --color-overdue: #FFB5B5;
 
-    --color-task-act: #CCE4FF;
-    --color-overdue-act: #FFA3A3;
-    --color-done-act: #B5DEC4;
+    --color-task-act: #A8D2FF;
+    --color-done-act: #9FD8AF;
+    --color-overdue-act: #FF8C8C;
 
     --label-low: #CCE4FF;
     --label-med: #fff3AC;
@@ -267,7 +267,7 @@ main {
     background-color: var(--color-task);
 }
 
-.mytask-tab_active {
+.mytask-tab_active, .mytask-tab:hover {
     background-color: var(--color-task-act);
 }
 
@@ -275,7 +275,7 @@ main {
     background-color: var(--color-done);
 }
 
-.done-tab_active {
+.done-tab_active, .done-tab:hover {
     background-color: var(--color-done-act);
 }
 
@@ -283,7 +283,7 @@ main {
     background-color: var(--color-overdue);
 }
 
-.overdue-tab_active {
+.overdue-tab_active, .overdue-tab:hover {
     background-color: var(--color-overdue-act);
 }
 
@@ -384,7 +384,7 @@ main {
 }
 
 .check-icon {
-    opacity : 0;
+    opacity: 0;
 }
 
 .check-icon_active {
